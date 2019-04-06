@@ -13,3 +13,4 @@
 *.fdb_latexmk
 *.pdf
 *.swp
+*sync*
