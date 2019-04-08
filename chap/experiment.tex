@@ -21,6 +21,17 @@ Tensorflow是最初由谷歌公司开发的一套现以开源的机器学习框�
 如果有更好的硬件条件（更多、更好的图形处理器，更大的内存，更多核心的CPU），本实验有希望会得到更精细的结果。
 
 \section{实验数据}
+本实验使用VOT2016数据集\supercite{Vojir-TR-2017-01}实现，相似的数据集还有VOT2017等。
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 0.5\textwidth]{chap/img/vot_2016_pixel.png}
+    \caption{VOT2016像素级标记}\label{fig:vot_2016_pixel}
+\end{figure}
+\par
+如图\ref{fig:vot_2016_pixel}所示，该数据集通过人工标记，提供了十分优秀的像素级的目标跟踪数据。该数据集有几百个序列，共有几万张图片。
+\par
+本实验的训练集和测试集均来源于该数据集，使用时将所有数据随机切分为训练集和测试集。
 
 
 \section{实验程序的编写}
