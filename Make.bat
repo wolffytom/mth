@@ -5,7 +5,7 @@
 @rem Public domain.
 
 set JOBNAME=thesis
-@rem Õâ¸ö±äÁ¿µÄÖµ¿ÉÒÔÎª latex »ò pdflatex¡£
+@rem ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Îª latex ï¿½ï¿½ pdflatexï¿½ï¿½
 set LATEX=latex
 set BIBTEX=biber -l zh__pinyin
 set DVIPDF=dvipdfmx
@@ -34,6 +34,7 @@ echo %0 [doc] [clean]
 goto end
 
 :end
-pause
+
+thesis.pdf
 
 @rem vim:ts=4:sw=4
