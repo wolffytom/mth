@@ -11,6 +11,5 @@
 *.toc
 *.gz
 *.fdb_latexmk
-*.pdf
 *.swp
 *sync*
