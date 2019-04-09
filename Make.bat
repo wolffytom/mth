@@ -6,7 +6,7 @@
 
 set JOBNAME=thesis
 @rem ���������ֵ����Ϊ latex �� pdflatex��
-set LATEX=latex
+set LATEX=xelatex
 set BIBTEX=biber -l zh__pinyin
 set DVIPDF=dvipdfmx
 
