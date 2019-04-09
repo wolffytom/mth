@@ -1,3 +1,4 @@
 git add *
-git commit -m 'push.sh'
+cmd="git commit -m 'push.sh at "$(date)"'"
+eval $cmd
 git push
