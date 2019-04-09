@@ -12,4 +12,5 @@
 *.gz
 *.fdb_latexmk
 *.swp
+*.pdf
 *sync*
