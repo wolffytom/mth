@@ -2,10 +2,35 @@
 \section{深度学习基础概念}
 深度学习(Deep Lrarning)是以深度神经网络为模型结构的机器学习算法\supercite{deng2014deep}。机器学习(Mechine Learning)通常指一些依靠计算机确定模型的建模方法。目前大多数机器学习算法还无法完全自行实现学习，通常只能在人为规定的模型下，针对某个小问题对特定的数据建模。
 \par
-机器学习，模式识别等学科最终试图解决的问题通常是建立模型，解决问题。如目标跟踪即可描述为输入是视频，输出是轨迹的问题。神经网络由于其优秀的非线性拟合能力，成为如今机器学习最常用的模型之一。
+机器学习，模式识别等学科最终试图解决的问题通常是建立模型，解决问题。如目标跟踪即可描述为输入是视频，输出是轨迹的问题。神经网络由于其优秀的非线性拟合能力，成为如今机器学习最常用的模型结构之一。
 \subsection{神经网络}
 
 \subsubsection{CNN:卷积神经网络}
+
+
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/vgg16-neural-network.jpg}
+    \caption{
+        用于图像分类的VGG16\supercite{simonyan2014very}卷积神经网络结构图.图片来自 \url{https://neurohive.io/en/popular-networks/vgg16/}
+        }\label{fig:vgg16_architecture}
+\end{figure}
+\par
+
+
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/u-net-architecture.png}
+    \caption{
+        用于图像分割的U-Net\supercite{ronneberger2015u}卷积神经网络结构图.图片来自
+        }\label{fig:unet_architecture}
+\end{figure}
+\par
+
+%\footnote{图片来自 \url{https://neurohive.io/en/popular-networks/vgg16/}}
+
 \subsubsection{RNN:循环神经网络}
 \subsubsection{反向传播求梯度法}
 
@@ -15,7 +40,7 @@
 \par
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width = 0.5\textwidth]{chap/img/overlap_examples.pdf}
+    \includegraphics[width = 1.\textwidth]{chap/img/overlap_examples.pdf}
     \caption{用于描述跟踪目标的外包矩形.红色:限定竖直的的外包矩形;绿色:不限定竖直的外包矩形.原图片为VOT竞赛中描述标记与目标的插图\supercite{VOT_TPAMI}}\label{fig:bunding_boxes}
 \end{figure}
 \par
