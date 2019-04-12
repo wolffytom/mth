@@ -2,11 +2,14 @@
 \section{深度学习基础概念}
 深度学习(Deep Lrarning)是以深度神经网络为模型结构的机器学习算法\supercite{deng2014deep}。机器学习(Mechine Learning)通常指一些依靠计算机确定模型的建模方法。目前大多数机器学习算法还无法完全自行实现学习，通常只能在人为规定的模型下，针对某个小问题对特定的数据建模。
 \par
-机器学习，模式识别等学科最终试图解决的问题通常是建立模型，解决问题。如目标跟踪即可描述为输入是视频，输出是轨迹的问题。神经网络由于其优秀的非线性拟合能力，成为如今机器学习最常用的模型结构之一。
+机器学习，模式识别等学科最终试图解决的问题通常是建立模型，解决问题。如目标跟踪即可描述为输入是视频，输出是轨迹的问题。神经网络(Neural Network, NN)由于其优秀的非线性拟合能力，成为如今机器学习最常用的模型结构之一。
 \subsection{神经网络}
-
+相比于k-NN,SVM(支持向量机),线性回归(linear regression)等传统机器学习算法,神经网络主要依靠激活函数(activation function)得到非线性效果.为了避免梯度消失的问题,近期的研究与应用中最常用的激活函数是ReLU激活函数\supercite{krizhevsky2012imagenet}.不同的激活函数会有不同效果\supercite{karlik2011performance}.
+\par
+而相比与各种树模型,神经网络又有更好的泛华能力.
+\par
+神经网络最初的灵感一部分来源于仿生学\supercite{mcculloch1943logical}\supercite{farley1954simulation}
 \subsubsection{CNN:卷积神经网络}
-
 
 \par
 \begin{figure}[htbp!]
@@ -24,7 +27,7 @@
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/u-net-architecture.png}
     \caption{
-        用于图像分割的U-Net\supercite{ronneberger2015u}卷积神经网络结构图.图片来自
+        用于图像分割的U-Net\supercite{ronneberger2015u}卷积神经网络结构图.
         }\label{fig:unet_architecture}
 \end{figure}
 \par
