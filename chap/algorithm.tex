@@ -4,13 +4,17 @@
 \par
 机器学习，模式识别等学科最终试图解决的问题通常是建立模型，解决问题。如目标跟踪即可描述为输入是视频，输出是轨迹的问题。神经网络(Neural Network, NN)由于其优秀的非线性拟合能力，成为如今机器学习最常用的模型结构之一。
 \subsection{神经网络}
+神经网络最初的灵感一部分来源于仿生学\supercite{mcculloch1943logical}\supercite{farley1954simulation},这也是神经网络的灵魂思想.
+\par
 相比于k-NN,SVM(支持向量机),线性回归(linear regression)等传统机器学习算法,神经网络主要依靠激活函数(activation function)得到非线性效果.为了避免梯度消失的问题,近期的研究与应用中最常用的激活函数是ReLU激活函数\supercite{krizhevsky2012imagenet}.不同的激活函数会有不同效果\supercite{karlik2011performance}.
 \par
 而相比与各种树模型,神经网络又有更好的泛华能力.
 \par
-神经网络最初的灵感一部分来源于仿生学\supercite{mcculloch1943logical}\supercite{farley1954simulation}
-\subsubsection{CNN:卷积神经网络}
-
+最简单的神经网络结构是全连接的(Fully Connected, 有时简称FC)神经网络, 该结构又称多层感知机(Multi Layer Perceptron, 简称MLP).多层感知机由多个层$l_1,l_2,...l_n$依次排列组成.每个层由许多神经元组成,某以层上的每个神经元将接受上一层所有神经元为输入,并向下一层的所有神经元输出.以ReLU为激活函数,位第k层的第m个神经元的输出为$output_{k,m}=ReLU(\sum_{i} (output_{k-1,i}*w_{k,m,i})+b_{k,m})$,其中$w_{k}$和$b_{k}$是属于第k层的变量,通常经过训练得出.
+\par
+全连接神经网络的连接较多,参数也会更多,即所有参数组成的参数向量很稀疏,不利于训练.通常只在最终将多维的状态量收敛成低维结果时使用.在前期对高维的数据的处理过程中,常常会对神经网络的结构进行一定简化,减少连接以利于训练.常用的减少连接方式有卷积神经网络和循环神经网络等.
+\par
+\subsubsection{卷积神经网络}
 \par
 \begin{figure}[htbp!]
     \centering
@@ -20,6 +24,10 @@
         }\label{fig:vgg16_architecture}
 \end{figure}
 \par
+卷积神经网络(Convolutional Neural Network, CNN)是一种为图像处理设计的神经网络结构
+
+
+CNN是一种基于模板滤波的图像处理方法。常用的CNN的模板大小是$3*3$，有时也可以是$5*5$，$7*7$等大小
 
 
 \par
@@ -66,7 +74,6 @@
 与纽约大学2017年实现的Conv-LSTM结构的跟踪算法不同的是,本文所采用的多级神经网络将把Conv-LSTM加入各个卷机层级;而与U-Net,SegNet等多级分割算法不同的是,本文将在整个结构中多处穿插LSTM以得到一个时间连续的结果.
 \section{基于CNN和RNN的像素级别跟踪模型在空间维度的处理}
 \subsection{CNN的原理}
-CNN是一种基于模板滤波的图像处理方法。常用的CNN的模板大小是$3*3$，有时也可以是$5*5$，$7*7$等大小
 \subsection{多尺度思想的引入}
 \section{基于CNN和RNN的像素级别跟踪模型在时间维度的处理}
 \subsection{RNN的原理}
