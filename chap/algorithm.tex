@@ -37,7 +37,7 @@
         }\label{fig:unet_architecture}
 \end{figure}
 \par
-不同于图像分类,图像分割等像素级图像处理问题需要得到更高维的结果,且得到的结果需要有一定的空间特性.如图\ref{fig:unet_architecture}的U-Net是一种常用的处理分割等像素级别问题的卷积神经网络.该网络有加密和解码两个步骤,加密阶段图像经过多次卷积和池化变小,蕴含的信息更宏观;而解码阶段图像经过反卷积(Deconvolution)操作再次放大,得到与原图大小相似的结果.类似结构的还有SegNet\supercite{badrinarayanan2017segnet}卷积神经网络等
+不同于图像分类,图像分割等像素级图像处理问题需要得到更高维的结果,且得到的结果需要有一定的空间特性.如图\ref{fig:unet_architecture}的U-Net是一种常用的处理分割等像素级别问题的卷积神经网络.该网络有加密和解码两个步骤,加密阶段图像经过多次卷积和池化变小,蕴含的信息更宏观;而解码阶段图像经过反卷积(Deconvolution)操作再次放大,得到与原图大小相似的结果.类似的还有SegNet\supercite{badrinarayanan2017segnet}卷积神经网络等.
 \par
 U-Net的网络结构为像素级别处理提供了思想基础.
 \par
