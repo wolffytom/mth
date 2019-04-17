@@ -101,7 +101,8 @@ RNN可以得到和原序列一样变长结果,也可以得到定长的结果.通
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/overlap_examples.pdf}
-    \caption{用于描述跟踪目标的外包矩形.红色:限定竖直的的外包矩形;绿色:不限定竖直的外包矩形.原图片为VOT竞赛中描述标记与目标的插图\supercite{VOT_TPAMI}}\label{fig:bunding_boxes}
+    \caption{图片为VOT竞赛中描述标记与目标的插图\supercite{VOT_TPAMI},这里用于演示矩形式目标描述中描述目标的外包矩形.红色:限定竖直的的外包矩形;绿色:不限定竖直的外包矩形.}
+    \label{fig:bunding_boxes}
 \end{figure}
 \par
 常见的矩形框视频目标跟踪算法考虑会考虑目标的最小外包矩形(Bounding Box)和位置(Location).最小外包矩形的方向有时是限定为竖直的,即矩形的上下边平行于图像的上下边,左右边同理;有时不限定,可以是任何方向.限定竖直与不限定竖直的矩形表示法如图\ref{fig:bunding_boxes}所示.位置一般用矩形的中心表示.
