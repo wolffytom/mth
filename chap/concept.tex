@@ -71,7 +71,14 @@ RNN可以得到和原序列一样变长结果,也可以得到定长的结果.通
 %TODO 介绍RNN展开方式
 
 \subsubsection{深度神经网络的训练}
-几乎所有的深度神经网络都需要配合训练(Training)得到的参数才能应用,即预测.不同的训练会得到不同的参数,预测得到的结果也会不同.
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/model_learning.pdf}
+    \caption{使用训练数据,将没有参数的模型$f(\alpha,x)$训练至有参数,可以实际应用的模型$f(\alpha_0,x)$的过程}
+    \label{fig:model_learning}
+\end{figure}
+几乎所有的深度神经网络都需要配合训练(training)得到的参数才能应用,即预测.不同的训练会得到不同的参数,预测得到的结果也会不同.
 \par
 梯度下降法是最典型的模型训练方法.
 \par
