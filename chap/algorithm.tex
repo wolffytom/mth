@@ -11,14 +11,16 @@
 与纽约大学2017年实现的Conv-LSTM结构的跟踪算法不同的是,本文所采用的多级神经网络将把Conv-LSTM加入各个卷机层级;而与U-Net,SegNet等多级分割算法不同的是,本文将在整个结构中多处穿插LSTM以得到一个时间连续的结果.
 \par
 同大多数跟踪算法类似,本算法的输入是一张张图片组成的视频序列,输出是像素级的跟踪结果.处理过程中需要始终存储并更新跟踪状态.
+\par
+本算法的结构如图\ref{fig:space_process},\ref{fig:CNN_FCLSTM},\ref{fig:time_process}所示.
 
 \par
-\begin{figure}[htbp!]
+\begin{sidewaysfigure}[htbp!]
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/space_process.pdf}
     \caption{本算法在空间维度对单张图片的处理(这里略去了处理时间维度的RNN)}
     \label{fig:space_process}
-\end{figure}
+\end{sidewaysfigure}
 \par
 \begin{figure}[htbp!]
     \centering
@@ -27,12 +29,13 @@
     \label{fig:CNN_FCLSTM}
 \end{figure}
 \par
-\begin{figure}[htbp!]
+\begin{sidewaysfigure}[htbp!]
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/time_process.pdf}
     \caption{本算法在时间维度的大致处理思路}
     \label{fig:time_process}
-\end{figure}
+\end{sidewaysfigure}
+\par
 
 \subsection{算法的输入}
 \par
@@ -42,9 +45,13 @@
 \par
 \begin{equation}\label{equ:input_norm}  input_{normlized} = \frac{input_{origin}}{255}  \end{equation}
 \par
-本算法的输入
+由于本算法的CNN处理过程中需要将2D图像结果展开(flat)后输入FC层,本算法只能接受固定输入大小的输入.本文后文的实验中将所有输入数据采样调整大小(Resize)至$500*500$大小的图片后进行处理.事实上如果不加入Conv+LSTM\&FC结构,本算法可以接受任意大小的输入.
+\par
 
 \subsection{算法的输出}
+本算法的输出是像素级的跟踪结果.像素级的跟踪结果将用一幅图像表示,高亮的像素代表目标,黑暗的像素代表背景.
+\par
+实际上本算法的输出由于经过Softmax\footnote{实际是Sigmoid}(软间隔最大化)处理,得到的所有像素的结果都将位于$(0,1)$间,某个像素的结果意味着该像素是目标的概率.如果希望得到严格区分的
 
 \subsection{处理时效性}
 % TODO 实时处理图(ppt)
