@@ -84,8 +84,10 @@ RNN可以得到和原序列一样变长结果,也可以得到定长的结果.通
         }\label{fig:mlp_paddle}
 \end{figure}
 \par
-图\ref{fig:mlp_paddle}即是一个用于分类问题的神经网络.
-
+图\ref{fig:mlp_paddle}即是一个用于分类问题的3层全连接神经网络,该分类问题需要将结果分为9类.第3层全链接层得到的结果可以记为$[net_0,net_1,...,net_9]$.解决分类问题时通常使用Softmax结构:
+\par
+\begin{equation}\label{equ:softmax}  y_i = \frac{exp(net_i)}{\sum{ exp(net_i) }}  \end{equation}
+\par
 
 \subsubsection{深度神经网络的训练}
 \par
