@@ -93,6 +93,8 @@ Softmax结构通常适用于多分类问题,而对于2分类问题,其简化版�
 \begin{equation} y = \frac{1}{1+e^{-x}}  \end{equation}
 \par
 其中y是样本属于正例的概率, $y\in (0,1)$.
+\par
+需要注意的是,Softmax要求最后一个全连接层的输出宽度等于类别数量,而Sigmoid要求最后一个全链接层输出标量.且在使用Softmax和Sigmoid时,最后一个全连接层通常不含激活函数,如图\ref{fig:mlp_paddle}所示.
 
 \subsubsection{深度神经网络的训练}
 \par
