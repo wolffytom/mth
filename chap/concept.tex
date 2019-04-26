@@ -86,8 +86,13 @@ RNN可以得到和原序列一样变长结果,也可以得到定长的结果.通
 \par
 图\ref{fig:mlp_paddle}即是一个用于分类问题的3层全连接神经网络,该分类问题需要将结果分为9类.第3层全链接层得到的结果可以记为$[net_0,net_1,...,net_9]$.解决分类问题时通常使用Softmax结构:
 \par
-\begin{equation}\label{equ:softmax}  y_i = \frac{exp(net_i)}{\sum{ exp(net_i) }}  \end{equation}
+\begin{equation} y_i = \frac{exp(net_i)}{\sum{ exp(net_i) }}  \end{equation}
 \par
+Softmax结构通常适用于多分类问题,而对于2分类问题,其简化版为Sigmoid函数:
+\par
+\begin{equation} y = \frac{1}{1+e^{-x}}  \end{equation}
+\par
+其中y是样本属于正例的概率, $y\in (0,1)$.
 
 \subsubsection{深度神经网络的训练}
 \par
