@@ -66,8 +66,21 @@
 本算法在时间尺度主要依靠RNN技术处理.有关RNN的基础概念已在\ref{section:rnn}中介绍过.
 \par
 本研究的算法将主要采用LSTM算法解决问题.具体的,LSTM单元将被加入到各个层级当中.LSTM在各种跟踪算法中有广泛应用,但大多数算法仅仅将其作为对最后结果的处理手段.本研究的算法将把LSTM作为所有的中间状态记录单元.
+
 \subsection{跟踪状态}
-\subsection{跟踪系统初始化}
+\par
+\begin{sidewaysfigure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/tracking_state.pdf}
+    \caption{以500*500大小输入为例,所有跟踪状态大致形状}
+    \label{fig:tracking_state}
+\end{sidewaysfigure}
+\par
+前文\ref{section:tracking_state}中介绍过视频跟踪算法中\textbf{跟踪状态}的概念.本算法直接使用RNN状态量记录和使用跟踪状态.当使用LSTM时,RNN的$h$和$c$状态量将同时作为跟踪状态使用.
+\par
+本算法的需要记录的所有跟踪状态大致如图\ref{fig:tracking_state}所示.前文中介绍过,跟踪状态的物理意义是之前的运动状态.%TODO go on
+\subsection{跟踪状态初始化}
+\textbf{跟踪状态初始化}指在跟踪初始如何获取一开始的跟踪状态.
 
 \section{本算法在空间维度的处理}
 本节与下一节将详细介绍本算法在空间,时间维度处理的设计理念.
