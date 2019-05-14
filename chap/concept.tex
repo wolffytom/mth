@@ -84,11 +84,23 @@ RNN可以得到和原序列一样变长结果,也可以得到定长的结果.通
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/The_LSTM_cell.png}
     \caption{
-        LSTM的结构\supercite{lstm_introduction}
-        }\label{fig:lstm}
+        LSTM细胞的结构\supercite{lstm_introduction}
+        }\label{fig:lstm_cell}
 \end{figure}
 \par
-随着研究的深入,更多的RNN细胞结构被提出.
+随着研究的深入,更多的RNN细胞结构被提出.最常用的是LSTM(Long-Short Time Memory, 长短时记忆)\supercite{hochreiter1997long}.如图\ref{fig:lstm_cell}所示,该结构的RNN同时保存$h$和$c$两个状态序列.
+\par
+\begin{equation} \label{equ:lstm_struct}
+\begin{gathered}
+i_i = \sigma (W_i x_t + R_i h_{t-1} + b_i) \\
+f_t = \sigma (W_f x_t + R_f h_{t-1} + b_f) \\
+o_t = \sigma (W_o x_t + R_o h_{t-1} + b_o) \\
+c'_t = tanh(W_c x_t + R_c h_{t-1} + b_c) \\
+c_t = f_t \cdot c_{t-1}  + i_t \cdot c'_t \\
+h_t = o_t \cdot tanh(c_t) \\
+\end{gathered}
+\end{equation}
+\par
 
 %TODO 介绍LSTM
 %TODO 介绍RNN展开方式
