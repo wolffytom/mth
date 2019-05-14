@@ -48,13 +48,19 @@
 \par
 本文希望提出的像素级别跟踪算法将建立在一个单独简洁的框架上,结合目前像素级别处理技术和目标跟踪技术的精髓,实现一个思路清晰的算法,并尝试寻求更好的结果.
 
-\subsection{深度学习技术}
-2016年alphago\supercite{wang2016does} TODO fix this
-2012年Hinton等人主导的深度学习技术能在图像处理,自然语言处理等方向大放异彩的主要原因之一,是深度学习采用了简单的模型,配合上复杂而可训练的参数,从而得到更好的结果.简单的模型指CNN\footnote{Convolution Neural Network, 卷积神经网络},RNN\footnote{Recurrent Neural Network, 循环神经网络}.前者主要用于处理空间尺度,即图像;后者主要处理时间尺度,即语音和视频.CNN和RNN的结构都很简单,由于权值共享思想,需要训练的参数也很少.但由于其采用了仿生学的原理,得到的结果往往比传统算法优秀.实际上在20世纪末,就已经有人提出并用图像数据尝试了深度学习\supercite{lecun1998gradient}.但直到近年来,GPU计算的普及才使得深度学习技术有了更大的用武之地.2013年,加州大学伯克利分校的发布了Caffe
-\supercite{jia2014caffe}深度学习工具(后来与PyTorch\supercite{paszke2017automatic}合并),谷歌公司于2017年初发布Tensorflow
-\supercite{abadi2016tensorflow}的python版本API.这些开源,开放,高效,简单易用的工具使深度学习算法的实现变得十分容易.
+\subsection{深度学习技术的发展}
+2016年alphago\supercite{wang2016does}让许多人认识到了深度学习技术的能力.实际上更早之前深度学习研究工作就已经展开.
+\par
+2012年Hinton等人主导的深度学习技术能在图像处理,自然语言处理等方向大放异彩的主要原因之一,是深度学习采用了简单的模型,配合上复杂而可训练的参数,从而得到更好的结果.简单的模型指CNN\footnote{Convolution Neural Network, 卷积神经网络},RNN\footnote{Recurrent Neural Network, 循环神经网络}.前者主要用于处理空间尺度,即图像;后者主要处理时间尺度,即语音和视频.CNN和RNN的结构都很简单,由于权值共享思想,需要训练的参数也很少.但由于其采用了仿生学的原理,得到的结果往往比传统算法优秀.
+\par
+更早的,在20世纪末,就已经有人提出并用图像数据尝试了深度学习\supercite{lecun1998gradient}.但直到近年来,GPU计算的普及才使得深度学习技术有了更大的用武之地.
 \par
 本文提出的算法将主要采用深度学习方法,力求用一个简单的深度学习模型解决复杂的问题.
+
+\subsubsection{深度学习工具}
+2013年,加州大学伯克利分校的发布了Caffe\supercite{jia2014caffe}深度学习工具(后来与PyTorch\supercite{paszke2017automatic}合并),谷歌公司于2017年初发布Tensorflow\supercite{abadi2016tensorflow}的python版本API.在国内,百度也发布过自己的深度学习框架PaddlePaddle\supercite{recognize_digits_paddle}.
+\par
+这些开源免费,高效实用,简单易用的工具使深度学习算法的实现变得十分容易,增加了个人开发者对深度学习算法贡献的容易度.
 
 \subsection{视频跟踪数据集}
 近年来随着研究的火热,产生了许多网络上共享的数据集,典型的有2009年的ImageNet\supercite{imagenet_cvpr09}.
@@ -63,7 +69,7 @@
 在跟踪领域最典型的有VOT\supercite{VOT_TPAMI}和OTB\supercite{WuLimYang13}数据集.特别是VOT数据集2016年的像素级别数据\supercite{Vojir-TR-2017-01},以人工标注的方式提供了像素级别的视频跟踪训练集.在图像分割问题上同样有许多数据集,如VOS\supercite{Cae+17}等.这些数据集的数据量很大,数据质量也很好,给模型训练带来了许多方便.本文将直接使用VOT等跟踪数据集,并尝试使用一些分割数据集对模型进行更为细节的训练.
 
 \section{本研究主要工作和本文结构安排}
-本研究主要先进行了综述调查,发现了问题,总结了前人的研究结果.提出了一种基于CNN和RNN的像素级跟踪算法,并对这种算法进行了结构调优.本研究还实现了该算法,并对结果进行了定量分析.
+本研究主要先进行了综述调查,发现了问题,总结了前人的研究结果.提出了一种基于CNN和RNN的像素级跟踪算法,并对这种算法进行了结构调优.本研究还实现了该算法,并对结果进行了定量分析.
 
 \par
 \begin{figure}[htbp!]
