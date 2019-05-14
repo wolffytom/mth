@@ -148,8 +148,18 @@ RNN可以得到和原序列一样变长结果,也可以得到定长的结果.通
 本研究提出的算法在实验中采用了LSTM作为主要RNN细胞结构.
 
 \paragraph{RNN的展开}\ \par
-实际上,RNN依然是前向神经网络.
-%TODO 介绍RNN展开方式
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/RNN-unrolled.png}
+    \caption{
+        RNN展开为常见的前向神经网络\supercite{Understanding-LSTMs}
+        }\label{fig:rnn_expand}
+\end{figure}
+\par
+实际上,将RNN按时间序列展开后,其本质依然是一张前向神经网络.如图\ref{fig:rnn_expand},该RNN展开后,所有的输入$x$在下方,所有的输出$h$在上方,网络中的数据流完全是自下而上,自左向右传播的.只是细胞层的所有$A$共享参数.这样的网络依然可以使用反向传播求梯度并更新参数进行训练.
+\par
+本研究的实验(见第\ref{section:experiment}章)将用这种方式展开RNN并训练.
+\par
 
 \subsubsection{用于分类问题的神经网络结构}
 \par
