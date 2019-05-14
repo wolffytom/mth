@@ -3,9 +3,10 @@
 \chapter{深度学习理论与现有的视频目标跟踪算法概论}
 本章将介绍深度学习与视频目标跟踪算法的基础概念与常用算法.
 \par
-深度学习是本研究运用的主要方法,但其并不是本人专业常用的方法.本研究为了利用计算机学最新的研究成果,研究并采用了计算机视觉,统计领域今年来常用的深度学习方法.本研究提出的算法也将主要由多种深度学习算法组合而成.
+深度学习是本研究运用的主要方法,但其并不是本文作者专业常用的方法.本研究为了利用计算机学最新的研究成果,研究并采用了计算机视觉,统计领域今年来常用的深度学习方法.本研究提出的算法也将主要由多种深度学习算法组合而成.
 \par
 本章还将介绍一些视频目标跟踪算法.
+
 \section{深度学习基础概念}
 深度学习(Deep Lrarning)是以深度神经网络为模型结构的机器学习算法\supercite{deng2014deep}.机器学习(Mechine Learning)通常指一些依靠计算机确定模型的建模方法.目前大多数机器学习算法还无法完全自行实现学习，通常只能在人为规定的模型下，针对某个小问题对特定的数据建模.
 \par
@@ -65,10 +66,30 @@ RNN(循环神经网络, 又称递归神经网络, Recurrent Neural Network)是�
 \par
 RNN能很好解决这个问题.RNN可以将参数相同的某个神经单元重复使用多次以处理.通常情况下\footnote{这里介绍的RNN全是单向RNN,且对时间序列处理的先后顺序为时间流逝的顺序},RNN单元接受前一时刻的状态量和本时刻的信息,得到本时刻的输出和输出给下一时刻的状态量.
 \par
-如图\ref{fig:rnn}所示,对一个长度为$t$的时间序列,我们在每个时刻观察到的信息为$x_1, x_2, ...x_t$,则对第$i$时刻,有$y_i,h_i = RNN(x_i, h_{i-1})$.其中$y_i$为该时刻处理得到的结果,$h_i$为该时刻的状态描述即状态量,$RNN$为该RNN的处理函数,该RNN对每个时刻的处理函数参数相同.通常情况下,$x,y,h$都是张量.
+如图\ref{fig:rnn}所示,对一个长度为$t$的时间序列,我们在每个时刻观察到的信息为$x_1, x_2, ...x_t$,则对第$i$时刻,有:
+\par
+\begin{equation} \label{equ:rnn} y_i,h_i = RNN(x_i, h_{i-1})  \end{equation}
+\par
+其中$y_i$为该时刻处理得到的结果,$h_i$为该时刻的状态描述即状态量,$RNN$为该RNN的处理函数,该RNN对每个时刻的处理函数参数相同.通常情况下,$x,y,h$都是张量.
 \par
 RNN可以得到和原序列一样变长结果,也可以得到定长的结果.通常变长的结果由每时刻的输出即上段的$y$组合得到,而定长的结果由最终的状态$h_t$经过处理得到.定长的结果一般用于该序列进行一个系统的描述,而变长的结果需要得到该序列每个时刻的信息.
 \par
+对于图\ref{fig:rnn}和公式\ref{equ:rnn}中演示的RNN的处理函数$RNN$,该处理函数通常称为RNN细胞(RNN Cell).RNN细胞可以是最简单的单层神经网络结构:
+\par
+\begin{equation} \label{equ:simple_rnn} y_i = h_i = ReLU(b + W concat(x_i, h_{i-1}))  \end{equation}
+\par
+上式是一个以ReLU作为激活函数的单层神经网络RNN细胞的结构.
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/The_LSTM_cell.png}
+    \caption{
+        LSTM的结构\supercite{lstm_introduction}
+        }\label{fig:lstm}
+\end{figure}
+\par
+随着研究的深入,更多的RNN细胞结构被提出.
+
 %TODO 介绍LSTM
 %TODO 介绍RNN展开方式
 
