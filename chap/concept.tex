@@ -80,29 +80,75 @@ RNN可以得到和原序列一样变长结果,也可以得到定长的结果.通
 \par
 上式是一个以ReLU作为激活函数的单层神经网络RNN细胞的结构.
 \par
+
+\paragraph{更高级的RNN:LSTM细胞}\ \par
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width = 1.\textwidth]{chap/img/The_LSTM_cell.png}
+    \includegraphics[width = 1.\textwidth]{chap/img/LSTM3-chain.png}
     \caption{
-        LSTM细胞的结构\supercite{lstm_introduction}
+        LSTM细胞的结构概况,$C$为其细胞状态(Cell State)\supercite{Understanding-LSTMs}
         }\label{fig:lstm_cell}
 \end{figure}
 \par
-随着研究的深入,更多的RNN细胞结构被提出.最常用的是LSTM(Long-Short Time Memory, 长短时记忆)\supercite{hochreiter1997long}.如图\ref{fig:lstm_cell}所示,该结构的RNN同时保存$h$和$c$两个状态序列.
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/LSTM3-focus-f.png}
+    \caption{
+        LSTM细胞的遗忘门,产生的$f$用于删除细胞状态中过时的信息\supercite{Understanding-LSTMs}
+        }\label{fig:lstm_f}
+\end{figure}
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/LSTM3-focus-i.png}
+    \caption{
+        LSTM细胞的输入门,为细胞状态添加新信息\supercite{Understanding-LSTMs}
+        }\label{fig:lstm_i}
+\end{figure}
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/LSTM3-focus-C.png}
+    \caption{
+        LSTM细胞状态的更新,先遗忘再加入新信息\supercite{Understanding-LSTMs}
+        }\label{fig:lstm_c}
+\end{figure}
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/LSTM3-focus-o.png}
+    \caption{
+        LSTM细胞的输出门,结合输入与更新后的细胞状态$C_t$产生输出$h_t$\supercite{Understanding-LSTMs}
+        }\label{fig:lstm_o}
+\end{figure}
+\par
+
+随着研究的深入,更多的RNN细胞结构被提出.最常用的是LSTM(Long-Short Time Memory, 长短时记忆)\supercite{hochreiter1997long}.如图\ref{fig:lstm_cell}所示,该结构的RNN主要保存$C$状态序列,用来长期记录细胞的状态.同时,每次的输出$h$也会被当作下一个LSTM细胞的输入.即同时存在$C$和$h$两个状态序列,状态序列的大小通常为输出大小的两倍.
 \par
 \begin{equation} \label{equ:lstm_structure}
     \begin{gathered}
-        i_i = \sigma (W_i x_t + R_i h_{t-1} + b_i) \\
-        f_t = \sigma (W_f x_t + R_f h_{t-1} + b_f) \\
-        o_t = \sigma (W_o x_t + R_o h_{t-1} + b_o) \\
-        c'_t = tanh(W_c x_t + R_c h_{t-1} + b_c) \\
-        c_t = f_t \cdot c_{t-1}  + i_t \cdot c'_t \\
-        h_t = o_t \cdot tanh(c_t) \\
+        f_t = \sigma (W_f \cdot [h_{t-1}, x_t] + b_f) \\
+        i_t = \sigma (W_i \cdot [h_{t-1}, x_t] + b_i) \\
+        \tilde{C}_t = tanh (W_C \cdot [h_{t-1}, x_t] + b_C) \\
+        C_t = f_t * C_{t-1}+i_t * \tilde{C}_t \\
+        o_t = \sigma (W_o \cdot [h_{t-1}, x_t] + b_o) \\
+        h_t = o_t * tanh(C_t) \\
     \end{gathered}
 \end{equation}
 \par
+公式\ref{equ:lstm_structure}表现了标准LSTM的具体计算方式\supercite{Understanding-LSTMs},其中:
+\begin{itemize}
+    \item $f_t$根据输入产生,最终乘入$C$,用于削弱$C$序列中过时的信息,称为遗忘(forget)门.见图\ref{fig:lstm_f}.
+    \item $i_t$和$\tilde{C}_t$根据输入分别用$tanh$和$sigmoid$激活函数产生,相乘后加入$C$,用于向$C$序列中添加新信息,称为输入门.见图\ref{fig:lstm_i}.
+    \item 状态序列$C$会经过遗忘和输入两次更新,见图\ref{fig:lstm_c}.
+    \item 输出$h_t$结合更新后的$C$和输入确定,见图\ref{fig:lstm_o}.
+\end{itemize}
+相比于最简单的RNN细胞,LSTM细胞使用更精细的设计,模拟人脑进行时间序列处理中每一时间点过程设计了独立的遗忘,输入,输出过程.其效果往往也比普通RNN好.且LSTM的细胞状态$C$于输出$h$相对独立,不容出现简单RNN存在的梯度消失问题\supercite{hochreiter1997long}.
+\par
+本研究提出的算法在实验中采用了LSTM作为主要RNN细胞结构.
 
-%TODO 介绍LSTM
+\paragraph{RNN的展开}\ \par
+实际上,RNN依然是前向神经网络.
 %TODO 介绍RNN展开方式
 
 \subsubsection{用于分类问题的神经网络结构}
