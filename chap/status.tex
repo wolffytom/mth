@@ -53,7 +53,7 @@
 \subsection{像素级别视频目标跟踪算法}
 美国学者Chad Aeschliman等在2010年提出过融合图像分割和目标跟踪的思路\supercite{aeschliman2010probabilistic}.德国学者Vasileios Belagiannis等在2012年提出过基于图像分割的目标跟踪算法\supercite{belagiannis2012segmentation}.韩国学者Jeany Son等在2015年提出过基于树模型的基于图像分割的目标跟踪算法\supercite{son2015tracking}.这些算法都借用了图像分割的算法思路,使用像素级别的数据训练分析,但最终输出依然是矩形级的结果.
 \par
-纽约大学在2017年完成的一项工作\supercite{DBLP:journals/corr/abs-1711-07377},该文用Conv-LSTM技术\supercite{PatrauceanHC16}尝试了对像素级别目标的视频目标跟踪.但该研究使用的手段复杂,最终结合了两种跟踪算法才得到结果.在更早的2007年,Hua等人用K-means算法也尝试过像素级别的跟踪\supercite{hua2008k},但由于没有结合深度学习算法,得到的结果也并不理想.
+纽约大学的Yilin Song等在2017年完成的一项工作\supercite{DBLP:journals/corr/abs-1711-07377},该文用Conv-LSTM技术\supercite{PatrauceanHC16}尝试了对像素级别目标的视频目标跟踪.但该研究使用的手段复杂,最终结合了两种跟踪算法才得到结果.在更早的2007年,Hua等人用K-means算法也尝试过像素级别的跟踪\supercite{hua2008k},但由于没有结合深度学习算法,得到的结果也并不理想.
 \par
 本文希望提出的像素级别跟踪算法将建立在一个单独简洁的框架上,结合目前像素级别处理技术和目标跟踪技术的精髓,实现一个思路清晰的算法,并尝试寻求更好的结果.
 

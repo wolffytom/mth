@@ -201,7 +201,7 @@ Softmax结构通常适用于多分类问题,而对于2分类问题,其简化版�
 \par
 反向传播是常用的深度神经网络求梯度的方法.
 
-\section{视频跟踪算法}
+\section{视频跟踪算法原理}
 上一章中介绍过,视频跟踪算法接受图像序列,输出目标位置.具体的,对于一个$n$帧长的,由$pic_1,pic_2...pic_n$共$n$张图像组成的视频,使用跟踪算法$Track$进行跟踪,在第$t$时刻算法的计算可以用下面的公式表示:
 \par
 \begin{equation}\label{equ:track_ite}  P_t,S_t=Track(pic_{t},P_{t-1},S_{t-1})  \end{equation}
@@ -240,4 +240,30 @@ Softmax结构通常适用于多分类问题,而对于2分类问题,其简化版�
 \par
 许多基于深度学习的视频目标跟踪算法都使用RNN的状态量存储目标跟踪状态.
 
-% TODO 介绍经典跟踪算法
+
+\section{现有的视频跟踪算法}
+\subsection{典型的跟踪架构:MDNet算法介绍}
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/mdnet_.png}
+    \caption{Nam等人2016年提出的多目标跟踪算法MDNet结构\supercite{nam2016mdnet}}
+    \label{fig:mdnet_arch}
+\end{figure}
+\par
+Nam等人2016年提出的MDNet(Learning Multi-Domain Convolutional Neural Networks,多域学习CNN网络)算法结构如图\ref{fig:mdnet_arch}所示.该算法在2015VOT准确度比赛中获得了第一名,一度成为各种跟踪算法的比较基线与创新基准.
+\par
+该算法 % TODO go on
+
+
+\subsection{以往的像素级跟踪算法}
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/Tracking_framework.pdf}
+    \caption{Yilin Song等人2017年提出的像素级目标跟踪算法结构\supercite{DBLP:journals/corr/abs-1711-07377}}
+    \label{fig:pixel_level_vot_2017}
+\end{figure}
+\par
+纽约大学的Yilin Song等人2017年提出的像素级目标跟踪算法的结构如图\ref{fig:pixel_level_vot_2017}所示.
+ % TODO go on
