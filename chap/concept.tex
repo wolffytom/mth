@@ -253,11 +253,12 @@ Softmax结构通常适用于多分类问题,而对于2分类问题,其简化版�
 \par
 Nam等人2016年提出的MDNet(Learning Multi-Domain Convolutional Neural Networks,多域学习CNN网络)算法结构如图\ref{fig:mdnet_arch}所示.该算法在2015VOT准确度比赛中获得了第一名,一度成为各种跟踪算法的比较基线与创新基准.
 \par
-该算法 % TODO go on
-
+该算法的最大创新点在于,其开创了深度学习用于跟踪的一种典型模式:多域学习.具体的,对于用于跟踪某一目标的模型,其中一部分参数是在之前漫长的训练中被确定的,另一部分参数是专门为这个目标确定的.专门为目标确定的参数不需要很强的泛化能力,可以专注于某个目标的跟踪,具有很高的效率.
+\par
+在图\ref{fig:mdnet_arch}中,左边的卷积(conv)和全连接4,5(fc4,fc5)层是训练确定的,最后的fc6是根据具体目标实现的参数.该思想一直影响着之后的基于深度学习的跟踪算法.
+\par
 
 \subsection{以往的像素级跟踪算法}
-
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/Tracking_framework.pdf}
@@ -265,5 +266,22 @@ Nam等人2016年提出的MDNet(Learning Multi-Domain Convolutional Neural Networ
     \label{fig:pixel_level_vot_2017}
 \end{figure}
 \par
-纽约大学的Yilin Song等人2017年提出的像素级目标跟踪算法的结构如图\ref{fig:pixel_level_vot_2017}所示.
- % TODO go on
+纽约大学的Yilin Song等人2017年提出的像素级目标跟踪算法的结构如图\ref{fig:pixel_level_vot_2017}所示.该算法的模型主要有Global Model(全局模型)和Local Model(本地模型)两部分,其中Global Model用于确定跟踪目标的大致位置,Local Model用于在大致位置区域分割出像素级的跟踪目标.
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/Local.pdf}
+    \caption{复杂的Local model结构\supercite{DBLP:journals/corr/abs-1711-07377}}
+    \label{fig:local_model}
+\end{figure}
+\par
+该算法在目标跟踪方面有MDNet相似的多域结构,图\ref{fig:pixel_level_vot_2017}中的Global Model和Local Model的一部分是训练得到的,Local Model中另一部分是对每个目标不同的.
+\par
+Global Model和Local Model中都使用了Conv-LSTM结构时空问题.Global Model的结构较简单,大致如图\ref{fig:pixel_level_vot_2017}中Global Model所示的结构.Local Model较复杂,细节如图\ref{fig:local_model}中所示.Global Model和Local Model大致是结合了几个预训练的特征提取器,最终经过一个卷积层得到分类结果.
+
+\subsection{现有算法的问题} \label{section:vot_problems}
+现有的几乎所有视频目标跟踪算法都只能跟踪较短的视频目标,跟踪持久性和鲁棒性还远远不够.
+\par
+自从视频目标跟踪算法出现以来,其算法的复杂程度就一直在增加.Yilin Song等人2017年提出的像素级目标跟踪算法\ref{fig:pixel_level_vot_2017}就是典型的例子,其模型复杂度很难描述,为了达到各种效果,强行人为组合多个预训练的模型结构成为一个大结构.新提出的算法只能继续堆砌模型数量,使算法变得更加庞大以提升效果.
+\par
+本研究试图改变这种困境,并在结构中加入多尺度思想,尽量重复使用简单的结构组成跟踪算法,并力求得到较好的效果.
