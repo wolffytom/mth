@@ -100,6 +100,14 @@
 类似与U-Net的结构,本文的卷机网络部分也将有多个降级和升级结构;每个降级结构包括几个卷积层,使用池化结构进行降级;每个升级部分采用升卷积进行升级处理.在降级过程中,图片数据的尺寸大小会衰减,同时等比例增加其波段范围.对于3层的结构,最小级的波段将有128个.
 
 \subsection{多尺度处理思想与Conv-LSTM结构结合} \label{section:multiscale}
+\par
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/crnn.pdf}
+    \caption{用于处理时空问题的Conv-LSTM结构}
+    \label{fig:conv_lstm_arch}
+\end{figure}
+\par
 这个多级结构的设计理念是为了处理多尺度问题.
 \par
 浅层的级别能很好的处理细节问题,但对宏观的把控会较弱,具体表现为可能会出现噪声点;深层的结构对宏观把控好,但对边界处理较弱.升级结构能将浅层处理得到的边界信息与深层处理得到的宏观信息相结合,得到一个更好的结果.
