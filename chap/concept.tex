@@ -1,7 +1,7 @@
 % Copyright (C) 2019 Cui Jialiang ( SESS, PKU ). All rights reserved.
 
 \chapter{深度学习理论与现有的视频目标跟踪算法概论}
-本章将介绍深度学习与视频目标跟踪算法的基础概念与常用算法.
+本章将介绍深度学习与视频目标跟踪算法的基础概念与常见算法.
 \par
 深度学习是本研究运用的主要方法,但其并不是本文作者专业常用的方法.本研究为了利用计算机学最新的研究成果,研究并采用了计算机视觉,统计领域今年来常用的深度学习方法.本研究提出的算法也将主要由多种深度学习算法组合而成.
 \par
@@ -16,7 +16,7 @@
 \par
 相比于k-NN,SVM(支持向量机),线性回归(linear regression)等传统机器学习算法,神经网络主要依靠激活函数(activation function)得到非线性效果.为了避免梯度消失的问题,近期的研究与应用中最常用的激活函数是ReLU激活函数\supercite{krizhevsky2012imagenet}.不同的激活函数会有不同效果\supercite{karlik2011performance}.
 \par
-而相比与各种树模型,神经网络又有更好的泛华能力.
+而相比与各种树模型,神经网络又有更好的泛化能力.
 \par
 \subsubsection{全链接神经网络}
 \par
@@ -40,6 +40,9 @@
 \par
 以图像分类问题为例,该问题需要输出一个较低维度的结果,即图像属于是每个类别的概率,可以用一个向量表示.用于图像分类的神经网络通常使用CNN层与最大值池化层交替减小图像大小,最终用全连接层得到分类结果.如图\ref{fig:vgg16_architecture}所示的VGG16\supercite{simonyan2014very}卷积神经网络即是这样一个图像分类算法.
 \par
+本研究提出的算法将利用卷积神经网络进行空间处理.
+\par
+\paragraph{像素级处理:加密-解码结构}\ \par
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/u-net-architecture.png}
@@ -50,7 +53,7 @@
 \par
 不同于图像分类,图像分割等像素级图像处理问题需要得到更高维的结果,且得到的结果需要有一定的空间特性.如图\ref{fig:unet_architecture}的U-Net是一种常用的处理分割等像素级别问题的卷积神经网络.该网络有加密和解码两个步骤,加密阶段图像经过多次卷积和池化变小,蕴含的信息更宏观;而解码阶段图像经过反卷积(Deconvolution)操作再次放大,得到与原图大小相似的结果.类似的还有SegNet\supercite{badrinarayanan2017segnet}卷积神经网络等.
 \par
-U-Net的网络结构为像素级别处理提供了思想基础.
+U-Net的网络结构为像素级别处理提供了思想基础.本研究提出的算法也将参考这个结构.
 \par
 
 \subsubsection{循环神经网络} \label{section:rnn}
@@ -184,6 +187,8 @@ Softmax结构通常适用于多分类问题,而对于2分类问题,其简化版�
 其中y是样本属于正例的概率, $y\in (0,1)$.
 \par
 需要注意的是,Softmax要求最后一个全连接层的输出宽度等于类别数量,而Sigmoid要求最后一个全链接层输出标量.且在使用Softmax和Sigmoid时,最后一个全连接层通常不含激活函数,如图\ref{fig:mlp_paddle}所示.
+\par
+本研究提出的算法最终将把像素级视频目标跟踪问题转化为一个二分类问题,并用Sigmoid函数得到二分类结果.
 
 \subsubsection{深度神经网络的训练}
 \par
@@ -195,13 +200,14 @@ Softmax结构通常适用于多分类问题,而对于2分类问题,其简化版�
 \end{figure}
 几乎所有的深度神经网络都需要配合训练(training)得到的参数才能应用,即预测.不同的训练会得到不同的参数,预测得到的结果也会不同.
 \par
-大多数机器学习的训练方式是定义一个损失函数(loss function),在每一步
+大多数机器学习的训练方式是定义一个损失函数(loss function),每次训练计算每个参数对损失的贡献,调整参数至损失变小.梯度下降法是最典型的模型训练方法.反向传播是常用的深度神经网络求梯度的方法.
 \par
-梯度下降法是最典型的模型训练方法.
-\par
-反向传播是常用的深度神经网络求梯度的方法.
+本研究提出的算法也将在实验中进行训练,最终得到可以预测的模型.
+% TODO 如果有空,详细说明
 
 \section{视频跟踪算法原理}
+这一部分将讲解视频跟踪算法的基础原理.
+\par
 上一章中介绍过,视频跟踪算法接受图像序列,输出目标位置.具体的,对于一个$n$帧长的,由$pic_1,pic_2...pic_n$共$n$张图像组成的视频,使用跟踪算法$Track$进行跟踪,在第$t$时刻算法的计算可以用下面的公式表示:
 \par
 \begin{equation}\label{equ:track_ite}  P_t,S_t=Track(pic_{t},P_{t-1},S_{t-1})  \end{equation}
@@ -238,11 +244,11 @@ Softmax结构通常适用于多分类问题,而对于2分类问题,其简化版�
 \subsection{跟踪状态} \label{section:tracking_state}
 \textbf{跟踪状态}是跟踪模型在跟踪过程中,用于记录当前信息以继续跟踪的状态量.在$t$时刻的跟踪状态$S_t$,它的物理含义可能包含用于预估目标将来的运动的目标之前一段时间的运动与变化状态.通常情况下,跟踪模型预测新一帧的目标位置需要用该帧到来时刻的跟踪状态与该帧的图像,但如果跟踪状态描述得足够理想,很多情况下仅凭描述优秀的跟踪状态就可猜测出目标接下来的运动趋势,从而大致确定新的目标位置与形态.
 \par
-许多基于深度学习的视频目标跟踪算法都使用RNN的状态量存储目标跟踪状态.
+许多基于深度学习的视频目标跟踪算法都使用RNN的状态量存储目标跟踪状态.本研究提出的算法也将这样做.
 
 
 \section{现有的视频跟踪算法}
-\subsection{典型的跟踪架构:MDNet算法介绍}
+\subsection{经典的跟踪架构:MDNet算法}
 \par
 \begin{figure}[htbp!]
     \centering
@@ -258,7 +264,7 @@ Nam等人2016年提出的MDNet(Learning Multi-Domain Convolutional Neural Networ
 在图\ref{fig:mdnet_arch}中,左边的卷积(conv)和全连接4,5(fc4,fc5)层是训练确定的,最后的fc6是根据具体目标实现的参数.该思想一直影响着之后的基于深度学习的跟踪算法.
 \par
 
-\subsection{以往的像素级跟踪算法}
+\subsection{以往的像素级跟踪算法} \label{section:pixel_wise_vot_2017_intro}
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/Tracking_framework.pdf}
@@ -282,6 +288,6 @@ Global Model和Local Model中都使用了Conv-LSTM结构时空问题.Global Mode
 \subsection{现有算法的问题} \label{section:vot_problems}
 现有的几乎所有视频目标跟踪算法都只能跟踪较短的视频目标,跟踪持久性和鲁棒性还远远不够.
 \par
-自从视频目标跟踪算法出现以来,其算法的复杂程度就一直在增加.Yilin Song等人2017年提出的像素级目标跟踪算法\ref{fig:pixel_level_vot_2017}就是典型的例子,其模型复杂度很难描述,为了达到各种效果,强行人为组合多个预训练的模型结构成为一个大结构.新提出的算法只能继续堆砌模型数量,使算法变得更加庞大以提升效果.
+自从视频目标跟踪算法出现以来,其算法的复杂程度就一直在增加.Yilin Song等人2017年提出的像素级目标跟踪算法(如图\ref{fig:pixel_level_vot_2017})就是典型的例子,其模型复杂度很难描述,为了达到各种效果,强行人为组合多个预训练的模型结构成为一个大结构.新提出的算法只能继续堆砌模型数量,使算法变得更加庞大以提升效果.
 \par
 本研究试图改变这种困境,并在结构中加入多尺度思想,尽量重复使用简单的结构组成跟踪算法,并力求得到较好的效果.
