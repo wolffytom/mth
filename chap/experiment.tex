@@ -75,3 +75,38 @@ AUC的一种直观定义是对于groundtruth中的任一个正例$a$和任一个
 需要注意的是，如果直接对整个视频序列求AUC，会出现前后置信度不同的问题。由于跟踪预估得到的是预计像素属于跟踪目标的概率，对于不同场景的不同帧概率基准可能不同，得到的结果也会不准确。
 \par
 除了需要关注整个视频的平均AUC，还需要关注AUC的衰减。由于信息的丢失，在一开始的跟踪中跟踪往往是最准确的，随着跟踪时间的推移，跟踪信息会逐渐损耗。更好的跟踪系统损耗会更慢。
+
+
+\section{实验结果与结论}
+论文的实验顺利进行了，并得到了结果。
+\par
+\begin{sidewaysfigure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/result_bag.pdf}
+    \caption{跟踪结果-袋子:第一行为原图，第二行为跟踪结果概率图，第三行为二值化结果}
+    \label{fig:result_bag}
+\end{sidewaysfigure}
+\par
+\begin{sidewaysfigure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/result_bag.pdf}
+    \caption{跟踪结果-老虎玩具:第一行为原图，第二行为跟踪结果概率图，第三行为二值化结果}
+    \label{fig:result_tiger}
+\end{sidewaysfigure}
+\par
+实验结果的图像展示见图\ref{fig:result_bag}和图\ref{fig:result_tiger}。
+\par
+%\subsection{结果定量评估}
+\par
+\begin{sidewaysfigure}[htbp!]
+    \centering
+    \includegraphics[width = 1.\textwidth]{chap/img/res_auc.pdf}
+    \caption{测试集中一些序列的跟踪AUC统计}
+    \label{fig:res_auc}
+\end{sidewaysfigure}
+\par
+本实验采用了AUC作为评价结果(详见前文\ref{section:auc})。图\ref{fig:res_auc}中展示了几组实验的AUC统计。
+\par
+可以看到，在许多样本序列中，论文的模型具有一定的跟踪能力。
+\subsection{实验结论}
+经过实验，论文提出的像素级目标跟踪算法具有一定的像素级目标跟踪能力，具有应用的前景与希望。

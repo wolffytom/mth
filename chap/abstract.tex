@@ -1,19 +1,19 @@
 % Copyright (C) 2019 Cui Jialiang ( SESS, PKU ). All rights reserved.
 
 \begin{cabstract}
-	视频目标跟踪是目前数字图像处理领域热门的研究方向。虽然像素级视频目标跟踪是视频目标跟踪研究中较空白的分支，但像素级视频目标跟踪在遥感观测等应用领域有着重大的作用与应用前景。随着深度学习算法的崛起，深度学习成为了解决各种视频图像处理问题的主流算法。
+	视频目标跟踪是目前数字图像处理领域热门的研究方向。虽然像素级视频目标跟踪是视频目标跟踪研究中较空白的分支，但像素级视频目标跟踪在遥感观测等应用领域有着重大的作用与应用前景。随着深度学习算法的崛起，深度学习成为了解决各种视频图像处理问题的主流算法。目前各种基于深度学习的视频目标跟踪算法结构都较复杂。且像素级视频目标跟踪研究很少。
 	\par
-	本文介绍了像素级视频跟踪问题和相关研究的现状。详细研究分析并讲解了现有的视频跟踪算法和深度学习技术的细节。基于深度学习技术，参考图像分割算法与近期少量的像素级目标跟踪算法研究，本文提出了一种像素级视频跟踪算法。该算法在足够的计算资源下可以实现实时像素级目标跟踪计算。
+	论文研究了像素级视频跟踪问题和相关研究的现状。详细讲解并分析了现有的视频跟踪算法和深度学习技术。基于深度学习技术，参考加密-解码结构的图像分割算法与近期少量的像素级目标跟踪算法研究，论文提出了一种结构简单的像素级视频跟踪算法，将循环神经网络结构加入了各个尺度的卷积神经网络中，分多个尺度进行跟踪处理。该算法在足够的计算资源下可以实现实时像素级目标跟踪计算。
 	\par
-	本文详细说明了所提出算法的结构，并介绍了背景与设计原因。为了验证该算法的有效性，本文阐述了为其设计的实验的各种细节与实验结果。
+	论文详细说明了所提出算法的结构，并介绍了背景与设计原因。为了验证该算法的有效性，论文设计了实验与评估体系。
 	\par
-	实验结果表明，本文提出的算法有较好的像素级视频目标跟踪效果。
+	实验结果表明，论文提出的算法有较好的像素级视频目标跟踪效果。
 \end{cabstract}
 
-\begin{eabstract}
-	Video object tracking is becoming a popular research field in digital image processing. Pixel-wise video object tracking playes an important application role, but research on it appeares rarely. Deep learning has become major thought of video and image processing.
+\begin{eabstract} % TODO fix this same to chinese
+	Video object tracking is becoming a popular research field in digital image processing. Pixel-wise video object tracking playes an important application role, but research on it appeares rarely. Deep learning has become major thought of video and image processing. Video object tracking algorithms based on deep learning usually have difficult archtectures. 
 	\par
-	We conclude the related research of pixel-wise video object tracking, and analysed the existed problems. Then we proposed an pixel-wise video object tracking algorithm based on deep learning technology and image segmentation which can play a real time processing with sufficient compute resources.
+	We conclude the related research of pixel-wise video object tracking, and analysed the existed problems. Then we proposed an pixel-wise video object tracking algorithm based on deep learning technology and encode-decode like image segmentation algorithm which can play a real time processing with sufficient compute resources. The algorithm uses recurrent neural network in each scale of convolutional neural network to produce a multi-scale tracking effect.
 	\par
 	We descripted the algorithm in details, including its technology background and reason of design. And we proposed an experiment to verify it.
 	\par
