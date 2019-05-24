@@ -14,7 +14,7 @@
 产生式模型指基于当前时刻及前一段时间的目标状态，结合新加入的帧的视频内容，直接根据概率模型产生一个新的跟踪目标。在计算能力极差的八九十年代，许多早期的模型
 \supercite{schalkoff1982model}
 都是产生式模型。直到20世纪初，产生式模型依然是主流。基于Kalman滤波的许多模型
-\supercite{kim2002fast， weng2006video， comaniciu2003kernel}
+\supercite{kim2002fast, weng2006video, comaniciu2003kernel}
 都为推动跟踪效果做出过贡献。
 \par
 然而在现在\footnote{本文完成于2019年}，判别式模型已经完全占据了视频目标跟踪的主流。2012年Hinton提出AlexNet 
@@ -23,9 +23,9 @@
 \supercite{krizhevsky2012imagenet} 
 (Convolution neural network)在图像处理的普适性，在:
 \begin{itemize}
-    \item 图像分类\supercite{krizhevsky2012imagenet， witten2016data， he2016deep}
+    \item 图像分类\supercite{krizhevsky2012imagenet, witten2016data, he2016deep}
     \item 图像分割\supercite{long2015fully}
-    \item 目标检测\supercite{ren2015faster， redmon2016you}
+    \item 目标检测\supercite{ren2015faster, redmon2016you}
 \end{itemize}
 等领域均赢得了学界的认可，迅速与传统方法结合，成为这些研究方向必不可少的重要方法。
 \par
@@ -83,12 +83,12 @@
 \section{论文主要研究内容与结构安排}
 论文主要先进行了综述调查，发现了问题，总结了前人的研究结果。提出了一种基于CNN和RNN的像素级跟踪算法，并对这种算法进行了结构调优。论文还实现了该算法，并对结果进行了定量分析。
 
-\par
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width = 8\textwidth]{chap/img/thesis_structure.pdf}
-    \caption{论文结构图}
-    \label{fig:thesis_structure}
+    \includegraphics[width = 1.\textwidth]{chap/img/thesis_structure.pdf}
+    \caption{
+        论文结构图
+        }\label{fig:thesis_structure2}
 \end{figure}
 \par
-本论文的结构安排大致如图\ref{fig:thesis_structure}所示。
+本论文的结构安排大致如图\ref{fig:thesis_structure2}所示。
