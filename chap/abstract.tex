@@ -1,24 +1,44 @@
 % Copyright (C) 2019 Cui Jialiang ( SESS, PKU ). All rights reserved.
 
 \begin{cabstract}
-	目前，深度学习和视频目标跟踪是数字图像处理领域热门的研究方向。在无人机国土安全监测等遥感应用场景的需求的推动下，高效的工业化视频目标跟踪算法成为迫切的研究需求。而像素级视频目标跟踪算法作为视频目标跟踪算法中精度最高的一种，十分值得进一步深入研究。
+	目前，深度学习和视频目标跟踪是数字图像处理领域热门的研究方向。在无人机国土安全监测等遥感应用场景的强烈需求推动下，高效的工业化视频目标跟踪算法成为迫切的研究需要。而像素级视频目标跟踪算法作为视频目标跟踪算法中精度最高、结果最细致的一种，十分值得进一步深入研究。
 	\par
-	近年来出现的各种以深度学习为和新方法的视频目标跟踪算法相比传统算法在算法理论和跟踪效果上有明显改进和提升，但仍然存在效率较低，计算效果不够理想，算法结构亦较为复杂。迫切需要算法革新以提升效率、提高效果、简化结构。因此，论文\footnote{本研究得到国家重点研发计划：“高频次迅捷无人航空器区域组网遥感观测技术”（编号：2017YFB0503003）和国家自然科学基金：“基于标准形态与稀疏表示的非刚性三维形状检索方法研究”（编号：61672043）资助）}提出了改进的基于深度学习的像素级视频目标跟踪算法。
+	近年来出现的各种以深度学习为核心方法的视频目标跟踪算法相比传统算法在算法理论和跟踪效果上都有明显的改进和提升，但仍存在计算效率较低、效果不够理想、算法结构复杂等问题，需要进行算法革新以提升效率、提高效果、简化结构。因此论文\footnote{本研究得到国家重点研发计划：“高频次迅捷无人航空器区域组网遥感观测技术”（编号：2017YFB0503003）和国家自然科学基金：“基于标准形态与稀疏表示的非刚性三维形状检索方法研究”（编号：61672043）资助）}提出了改进的基于深度学习的像素级视频目标跟踪算法。
 	\par
-	论文研究了像素级视频目标跟踪问题和相关研究的现状。随着深度学习理论的成熟和研究的深入，矩形级视频目标跟踪和有着像素级处理结果的图像分割都有了较好的解决方案，但没有能将时间、空间维度的处理过程很好结合的像素级视频目标跟踪算法。现有的像素级视频目标跟踪算法不得不结合多种方法的处理结果才能得到跟踪效果，使算法结构十分复杂，不利于进一步优化。
+	论文研究了像素级视频目标跟踪问题和相关研究的现状。随着深度学习理论的成熟和研究的深入，矩形级视频目标跟踪和有着像素级处理结果的图像分割都有了较好的解决方案。但像素级视频目标跟踪算法都无法将时间、空间维度的处理过程很好结合。现有的像素级视频目标跟踪算法不得不结合多种方法的处理结果才能得到跟踪效果，使其结构十分复杂，不利于进一步优化。
 	\par
-	论文基于已成功应用于图像分割的编码-解码卷积神经网络和用于时间序列处理的循环神经网络提出了一种视频目标跟踪算法，将循环神经网络插入
-	论述并分析了现有的视频跟踪算法和深度学习技术。基于深度学习技术，参考编码-解码结构的图像分割算法与近期少量的像素级目标跟踪算法研究，论文提出了一种结构简单对称的像素级视频目标跟踪算法，将循环神经网络结构加入了各个尺度的卷积层中，在多个尺度上进行跟踪处理。该算法在足够的计算资源下可以实现实时像素级目标跟踪计算。
+	论文基于已成功应用于图像分割的编码-解码卷积神经网络和用于时间序列处理的循环神经网络提出了一种像素级视频目标跟踪算法。插入各个卷积层的循环神经网络能利用卷积神经网络各层中不同尺度的中间信息进行时间序列分析，在多个尺度上进行跟踪。
 	\par
-	论文详细论述了所提出算法的结构。为了验证该算法的有效性，论文设计了实验与评估体系。实验结果表明，论文提出的算法有较好的像素级视频目标跟踪效果。
+	论文编程实现了提出的算法，并将其开源。
+	\par
+	为了验证该算法的有效性，论文设计了实验与评估体系，用公开数据集进行训练并测试。跟踪结果图像和定量化AUC分析表明，论文提出的算法有较好的像素级视频目标跟踪效果。
+	\par
+	论文总结了所提出的算法。由于只使用了一个神经网络就能进行像素级的跟踪，论文提出的算法结构简洁对称。由于各个尺度均有跟踪信息参与跟踪，论文提出的算法具有多尺度性，跟踪效果更好。
 \end{cabstract}
 
 \begin{eabstract}
-	Video object tracking is becoming a popular research field in digital image processing. Pixel-wise video object tracking playes an important application role, but research on it appeares rarely. Deep learning has become major thought of video and image processing. Video object tracking algorithms based on deep learning usually have difficult archtectures.
+	% 目前，深度学习和视频目标跟踪是数字图像处理领域热门的研究方向。在无人机国土安全监测等遥感应用场景的强烈需求的推动下，高效的工业化视频目标跟踪算法成为迫切的研究需要。而像素级视频目标跟踪算法作为视频目标跟踪算法中精度最高、结果最细致的一种，十分值得进一步深入研究。
+	Video object tracking is becoming a popular research field in digital image processing. Efficient video object tracking algorithms for industrialization are becoming an important research requirements for national security defending by UAV. Pixel-wise video object tracking which provides most considerate tracking result should be considered seriously.
 	\par
-	We \footnote{Foundation item: National Key Research and Development Program of China, No.2017YFB0503003 and the National Natural Science Foundation of China, No.61672043} conclude the related research of pixel-wise video object tracking, and analysed the existed problems. Then we proposed an pixel-wise video object tracking algorithm based on deep learning technology and encode-decode like image segmentation algorithm which can play a real time processing with sufficient compute resources. The algorithm uses recurrent neural network in each scale of convolutional neural network to produce a multi-scale tracking effect.
+	% 近年来出现的各种以深度学习为核心方法的视频目标跟踪算法相比传统算法在算法理论和跟踪效果上都有明显改进和提升，但仍存在计算效率较低，效果不够理想、算法结构复杂等问题。迫切需要进行算法革新以提升效率、提高效果、简化结构。因此，论文\footnote{本研究得到国家重点研发计划：“高频次迅捷无人航空器区域组网遥感观测技术”（编号：2017YFB0503003）和国家自然科学基金：“基于标准形态与稀疏表示的非刚性三维形状检索方法研究”（编号：61672043）资助）}提出了改进的基于深度学习的像素级视频目标跟踪算法。
+	Deep learning based video object tracking algorithms which have been proposed recently improved the theory and effect of tracking, but it still has problems such as complicacy calculation, unsatisfactory effect and complex structure. 
+	We \footnote{Foundation item: National Key Research and Development Program of China, No.2017YFB0503003 and the National Natural Science Foundation of China, No.61672043}
+	proposed a new deep learning based pixel-wise video object tracking algorithm.
 	\par
-	We descripted the algorithm in details, including its technology background and reason of design. And we proposed an experiment to verify it.By the result of the experiment, it shows strong ability on video object tracking.
+	% 论文研究了像素级视频目标跟踪问题和相关研究的现状。随着深度学习理论的成熟和研究的深入，矩形级视频目标跟踪和有着像素级处理结果的图像分割都有了较好的解决方案，但没有能将时间、空间维度的处理过程很好结合的像素级视频目标跟踪算法。现有的像素级视频目标跟踪算法不得不结合多种方法的处理结果才能得到跟踪效果，使算法结构十分复杂，不利于进一步优化。
+	We analysed the research status of pixel-wise video object tracking algorithm and deep learning technology. With the deep learning technology becomming completed, bounding box video object tracking algorithm and pixel-wise video segmentation algorithm already have good solutions. However there is no algorithm which can provide perfect pixel-wise tracking result by well combining time and space information. Existing pixel-wise tracking algorithms have to integrate several different purposes algorithms to achieve tracking result. This leeds to very difficult algorithm structure, which is hard to be improved.
+	\par
+	% 论文基于已成功应用于图像分割的编码-解码卷积神经网络和用于时间序列处理的循环神经网络提出了一种视频目标跟踪算法。插入各个卷积层的循环神经网络能利用卷积神经网络中各层中的不同尺度的中间信息进行时间序列分析，在多个尺度上进行跟踪。
+	We proposed a pixel-wise algorithm based on encode-decode CNN for segmentation and RNN for time series analysis. The RNNs cut into each CNN layers can take advantage of different scaled information to analyse lots of scaled tracking status for tracking on multi-scale object.
+	\par
+	% 论文编程实现了提出的算法，并将其开源。
+	We designed and completed a program of proposed algorithm. And we made it open sourced on Github.
+	\par
+	% 为了验证该算法的有效性，论文设计了实验与评估体系。用公开数据集进行训练并测试。跟踪结果图像和定量化AUC分析表明，论文提出的算法有较好的像素级视频目标跟踪效果。
+	We planned an experiment and an evaluation method to test and verify the proposed algorithm. We used public pixel-wise tracking dataset to train and test it. The video result and AUC analysis showned that the proposed algorithm had a good pixel-wise tracking ability.
+	\par
+	% 论文总结了所提出的算法。由于只使用一个神经网络就能进行像素级的跟踪，论文提出的算法结构简洁对称。同时由于各个尺度均有跟踪信息参与跟踪，论文提出的算法具有多尺度效果，跟踪效果更好。
+	We summarized the proposed algorithm. With only one neural network included, the algorithm has a simple symmetry structure. And with multiple scale information participating the calculation, the result of tracking can have multi-scale effect which leed to better tracking result.
 \end{eabstract}
 
 % vim:ts=4:sw=4
