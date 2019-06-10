@@ -1,7 +1,7 @@
 % Copyright (C) 2019 Cui Jialiang ( SESS， PKU )。 All rights reserved。
 
-\chapter{深度学习理论与视频目标跟踪算法}
-本章介绍深度学习与视频目标跟踪算法的基础概念与常见算法。
+\chapter{深度神经网络与视频目标跟踪算法}
+本章介绍深度学习与视频目标跟踪算法的基础理论与常见算法，为介绍论文提出的算法打下基础。
 \par
 深度学习是论文的主要方法。论文为了利用计算机学最新的研究成果，研究并采用了计算机视觉，统计领域近年来常用的深度学习方法。论文提出的算法是结合多种深度学习算法形成的。
 \par
@@ -28,7 +28,7 @@
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/vgg16-neural-network.jpg}
     \caption{
-        用于图像分类的VGG16\supercite{simonyan2014very}卷积神经网络结构图,图片来自\url{https://neurohive。io/en/popular-networks/vgg16/}
+        用于图像分类的VGG16\supercite{simonyan2014very}卷积神经网络结构图,图片来自\url{https://neurohive.io/en/popular-networks/vgg16/}
         }\label{fig:vgg16_architecture}
 \end{figure}
 \par
@@ -55,7 +55,7 @@ U-Net的网络结构为像素级别处理提供了思想基础。论文提出的
 \par
 
 \subsubsection{循环神经网络} \label{section:rnn}
-RNN(循环神经网络， 又称递归神经网络， Recurrent Neural Network)是深度学习处理序列问题，尤其是时间序列数据时的重要方法。上文中介绍了全连接和卷积神经网络，这两种结构的神经网络接受的输入都是由网络结构事先确定的。如针对图像处理问题，通常的做法是将图片采样，拉伸至CNN的输入要求再进行处理。当进行时间序列分析时，这样的结构只能接受定长的时间序列数据。但实际上大多数时间序列数据是变长的。
+RNN(循环神经网络， 又称递归神经网络， Recurrent Neural Network)是深度学习处理序列问题，尤其是时间序列数据时的重要方法。上文中介绍了全连接和卷积神经网络，这两种结构的神经网络接受的输入都是由网络结构事先确定的。如针对图像处理问题，通常的做法是将图片采样并拉伸至CNN的输入要求再进行处理。当进行时间序列分析时，这样的结构只能接受定长的时间序列数据。但实际上大多数时间序列数据是变长的。
 \par
 \begin{figure}[htbp!]
     \centering
@@ -144,7 +144,7 @@ RNN可以得到和原序列一样变长结果，也可以得到定长的结果�
     \item 状态序列$C$会经过遗忘和输入两次更新，见图\ref{fig:lstm_c}。
     \item 输出$h_t$结合更新后的$C$和输入确定，见图\ref{fig:lstm_o}。
 \end{itemize}
-相比于最简单的RNN细胞，LSTM细胞使用更精细的设计，模拟人脑进行时间序列处理中每一时间点过程设计了独立的遗忘，输入，输出过程。其效果往往也比普通RNN好。且LSTM的细胞状态$C$于输出$h$相对独立，不容出现简单RNN存在的梯度消失问题\supercite{hochreiter1997long}。
+相比于最简单普通的RNN细胞，LSTM细胞使用更精细的设计，模拟人脑进行时间序列处理中每一时间点过程设计了独立的遗忘，输入，输出过程。其效果往往也比普通RNN好。且LSTM的细胞状态$C$于输出$h$相对独立，不容出现普通RNN存在的梯度消失问题\supercite{hochreiter1997long}。
 \par
 论文提出的算法在实验中采用了LSTM作为主要RNN细胞结构。
 
@@ -170,7 +170,7 @@ RNN可以得到和原序列一样变长结果，也可以得到定长的结果�
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/mlp_paddle.png}
     \caption{
-        使用Softmax实现分类的多层神经网络，图片来自百度公司PaddlePaddle平台(\url{https://github。com/PaddlePaddle/Paddle})的文档\supercite{recognize_digits_paddle}
+        使用Softmax实现分类的多层神经网络，图片来自PaddlePaddle平台(\url{https://github.com/PaddlePaddle/Paddle})的文档\supercite{recognize_digits_paddle}
         }\label{fig:mlp_paddle}
 \end{figure}
 \par
