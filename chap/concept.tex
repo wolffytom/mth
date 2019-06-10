@@ -1,14 +1,13 @@
 % Copyright (C) 2019 Cui Jialiang ( SESS， PKU )。 All rights reserved。
 
-\chapter{深度神经网络与视频目标跟踪算法}
-本章介绍深度学习与视频目标跟踪算法的基础理论与常见算法，为介绍论文提出的算法打下基础。
+\chapter{深度神经网络与视频目标跟踪算法分析}
+本章分析了深度神经网络与视频目标跟踪算法。
+论文将在第四章提出的算法是基于深度神经网络的，且其改进是基于现有的各种视频目标跟踪算法的。本章将从论文的改进点逐个介绍现有的算法，并分析现有算法的问题与改进空间。
 \par
-深度学习是论文的主要方法。论文为了利用计算机学最新的研究成果，研究并采用了计算机视觉，统计领域近年来常用的深度学习方法。论文提出的算法是结合多种深度学习算法形成的。
-\par
-本章还将介绍一些视频目标跟踪算法。
+本章将首先分析深度学习。深度学习是论文采用的主要方法。论文为了利用计算机学最新的研究成果，研究并采用了计算机视觉，统计领域近年来常用的深度学习方法。论文提出的算法是结合多种深度学习算法形成的。本章还将分析一些视频目标跟踪算法。
 
-\section{深度学习}
-深度学习(Deep Lrarning)是以深度神经网络为模型结构的机器学习算法\supercite{deng2014deep}。机器学习(Mechine Learning)通常指一些依靠计算机确定模型的建模方法。目前大多数机器学习算法还无法完全自行实现学习，通常只能在人为规定的模型下，针对某个小问题对特定的数据建模。
+\section{深度神经网络算法分析}
+深度学习(Deep Lrarning)是以深度神经网络(Deep Neural Network, DNN)为模型结构的机器学习算法\supercite{deng2014deep}。机器学习(Mechine Learning)通常指一些依靠计算机确定模型的建模方法。目前大多数机器学习算法还无法完全自行实现学习，通常只能在人为规定的模型下，针对某个小问题对特定的数据建模。
 \par
 机器学习，模式识别等学科最终试图解决的问题通常是建立模型，解决问题。如目标跟踪即可描述为输入是视频，输出是轨迹的问题。神经网络(Neural Network， NN)由于其优秀的非线性拟合能力，成为如今机器学习最常用的模型结构之一。
 \subsection{神经网络}
@@ -18,7 +17,7 @@
 \par
 而相比与各种树模型，神经网络又有更好的泛化能力。
 \par
-最简单的神经网络结构是全连接的(Fully Connected， 简称FC)神经网络， 该结构又称多层感知机(Multi Layer Perceptron， 简称MLP)。多层感知机由多个层$l_1，l_2，。。。l_n$依次排列组成。每个层由许多神经元组成，某一层上的每个神经元将接受上一层所有神经元为输入，并向下一层的所有神经元输出。以ReLU为激活函数，位第k层的第m个神经元的输出为$output_{k，m}=ReLU(\sum_{i} (output_{k-1，i}*w_{k，m，i})+b_{k，m})$，其中$w_{k}$和$b_{k}$是属于第k层的变量，通常经过训练得出。
+最简单的神经网络结构是全连接的(Fully Connected， 简称FC)神经网络， 该结构又称多层感知机(Multi Layer Perceptron， 简称MLP)。多层感知机由多个层$l_1,l_2,...l_n$依次排列组成。每个层由许多神经元组成，某一层上的每个神经元将接受上一层所有神经元为输入，并向下一层的所有神经元输出。以ReLU为激活函数，位第k层的第m个神经元的输出为$output_{k，m}=ReLU(\sum_{i} (output_{k-1，i}*w_{k，m，i})+b_{k，m})$，其中$w_{k}$和$b_{k}$是属于第k层的变量，通常经过训练得出。
 \par
 全连接神经网络的连接较多，参数也会更多，即所有参数组成的参数向量很稀疏，不利于训练。通常只在最终将多维的状态量收敛成低维结果时使用。在前期对高维的数据的处理过程中，常常会对神经网络的结构进行一定简化，减少连接以利于训练。常用的减少连接方式有卷积神经网络和循环神经网络等。
 \par
@@ -67,7 +66,7 @@ RNN(循环神经网络， 又称递归神经网络， Recurrent Neural Network)�
 \par
 RNN能很好解决这个问题。RNN可以将参数相同的某个神经单元重复使用多次以处理。通常情况下\footnote{这里介绍的RNN全是单向RNN，且对时间序列处理的先后顺序为时间流逝的顺序}，RNN单元接受前一时刻的状态量和本时刻的信息，得到本时刻的输出和输出给下一时刻的状态量。
 \par
-如图\ref{fig:rnn}所示，对一个长度为$t$的时间序列，我们在每个时刻观察到的信息为$x_1， x_2， 。。。x_t$，则对第$i$时刻，有:
+如图\ref{fig:rnn}所示，对一个长度为$t$的时间序列，我们在每个时刻观察到的信息为$x_1, x_2,... x_t$，则对第$i$时刻，有:
 \par
 \begin{equation} \label{equ:rnn} y_i，h_i = RNN(x_i， h_{i-1})  \end{equation}
 \par
@@ -174,7 +173,7 @@ RNN可以得到和原序列一样变长结果，也可以得到定长的结果�
         }\label{fig:mlp_paddle}
 \end{figure}
 \par
-图\ref{fig:mlp_paddle}即是一个用于分类问题的3层全连接神经网络，该分类问题需要将结果分为9类。第3层全链接层得到的结果可以记为$[net_0，net_1，。。。，net_9]$。解决分类问题时通常使用Softmax结构:
+图\ref{fig:mlp_paddle}即是一个用于分类问题的3层全连接神经网络，该分类问题需要将结果分为9类。第3层全链接层得到的结果可以记为$[net_0,net_1,...，net_9]$。解决分类问题时通常使用Softmax结构:
 \par
 \begin{equation} y_i = \frac{exp(net_i)}{\sum{ exp(net_i) }}  \end{equation}
 \par
@@ -182,7 +181,7 @@ Softmax结构通常适用于多分类问题，而对于2分类问题，其简化
 \par
 \begin{equation} y = \frac{1}{1+e^{-x}}  \end{equation}
 \par
-其中y是样本属于正例的概率， $y\in (0，1)$。
+其中y是样本属于正例的概率， $y\in (0,1)$。
 \par
 需要注意的是，Softmax要求最后一个全连接层的输出宽度等于类别数量，而Sigmoid要求最后一个全链接层输出标量。且在使用Softmax和Sigmoid时，最后一个全连接层通常不含激活函数，如图\ref{fig:mlp_paddle}所示。
 \par
@@ -193,7 +192,7 @@ Softmax结构通常适用于多分类问题，而对于2分类问题，其简化
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/model_learning.pdf}
-    \caption{使用训练数据，将没有参数的模型$f(\alpha，x)$训练至有参数，可以实际应用的模型$f(\alpha_0，x)$的过程}
+    \caption{使用训练数据，将没有参数的模型$f(\alpha,x)$训练至有参数，可以实际应用的模型$f(\alpha_0,x)$的过程}
     \label{fig:model_learning}
 \end{figure}
 几乎所有的深度神经网络都需要配合训练(training)得到的参数才能应用，即预测。不同的训练会得到不同的参数，预测得到的结果也会不同。
@@ -203,14 +202,14 @@ Softmax结构通常适用于多分类问题，而对于2分类问题，其简化
 论文提出的算法也将在实验中进行训练，最终得到可以预测的模型。
 % TODO 如果有空，详细说明
 
-\section{视频目标跟踪算法}
-这一部分将讲解视频目标跟踪算法。
+\section{视频目标跟踪算法分析}
+这一部分将分析视频目标跟踪算法理论与部分现有的视频目标跟踪算法存在的问题。
 \par
-上一章中介绍过，视频跟踪算法接受图像序列，输出目标位置。具体的，对于一个$n$帧长的，由$pic_1，pic_2..pic_n$共$n$张图像组成的视频，使用跟踪算法$Track$进行跟踪，在第$t$时刻算法的计算可以用下面的公式表示:
+上一章中介绍过，视频跟踪算法接受图像序列，输出目标位置。具体的，对于一个$n$帧长的，由$pic_1,pic_2,...pic_n$共$n$张图像组成的视频，使用跟踪算法$Track$进行跟踪，在第$t$时刻算法的计算可以用下面的公式表示:
 \par
-\begin{equation}\label{equ:track_ite}  P_t，S_t=Track(pic_{t},P_{t-1},S_{t-1})  \end{equation}
+\begin{equation}\label{equ:track_ite}  P_t,S_t=Track(pic_{t},P_{t-1},S_{t-1})  \end{equation}
 \par
-其中$P_t$，$S_t$分别代表$t$时刻的\textbf{目标位置与形态}和\textbf{跟踪状态}。这两个概念将在本节后边介绍。
+其中$P_t$,$S_t$分别代表$t$时刻的\textbf{目标位置与形态}和\textbf{跟踪状态}。这两个概念将在本节后边介绍。
 \par
 在整个跟踪过程中，跟踪系统将在每一帧到来时执行公式\ref{equ:track_ite}中描述的过程，最终获得所有的目标位置与形态$P$。
 \par
@@ -244,9 +243,7 @@ Softmax结构通常适用于多分类问题，而对于2分类问题，其简化
 \par
 许多基于深度学习的视频目标跟踪算法都使用RNN的状态量存储目标跟踪状态。论文提出的算法也将这样做。
 
-
-\section{现有的视频跟踪算法}
-\subsection{经典的跟踪架构:MDNet算法}
+\subsection{多域学习的跟踪架构:MDNet算法}
 \par
 \begin{figure}[htbp!]
     \centering
@@ -262,7 +259,7 @@ Nam等人2016年提出的MDNet(Learning Multi-Domain Convolutional Neural Networ
 在图\ref{fig:mdnet_arch}中，左边的卷积(conv)和全连接4，5(fc4，fc5)层是训练确定的，最后的fc6是根据具体目标实现的参数。该思想一直影响着之后的基于深度学习的跟踪算法。
 \par
 
-\subsection{以往的像素级跟踪算法} \label{section:pixel_wise_vot_2017_intro}
+\subsection{现有的像素级跟踪算法分析} \label{section:pixel_wise_vot_2017_intro}
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width = 1.\textwidth]{chap/img/Tracking_framework.pdf}
@@ -283,7 +280,7 @@ Nam等人2016年提出的MDNet(Learning Multi-Domain Convolutional Neural Networ
 \par
 Global Model和Local Model中都使用了Conv-LSTM结构时空问题。Global Model的结构较简单，大致如图\ref{fig:pixel_level_vot_2017}中Global Model所示的结构。Local Model较复杂，细节如图\ref{fig:local_model}中所示。Global Model和Local Model大致是结合了几个预训练的特征提取器，最终经过一个卷积层得到分类结果。
 
-\subsection{现有算法的问题} \label{section:vot_problems}
+\subsection{现有的视频目标跟踪算法存在的问题总结} \label{section:vot_problems}
 现有的几乎所有视频目标跟踪算法都只能跟踪较短的视频目标，跟踪持久性和鲁棒性还远远不够。
 \par
 自从视频目标跟踪算法出现以来，其算法的复杂程度就一直在增加。Yilin Song等人2017年提出的像素级目标跟踪算法(如图\ref{fig:pixel_level_vot_2017})就是典型的例子，其模型复杂度很难描述，为了达到各种效果，强行人为组合多个预训练的模型结构成为一个大结构。新提出的算法只能继续堆砌模型数量，使算法变得更加庞大以提升效果。
